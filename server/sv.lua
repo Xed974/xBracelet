@@ -25,11 +25,12 @@ ESX.RegisterUsableItem('pince', function(source)
 
     if (not xPlayer) then return end
     if (xPlayer.getInventoryItem("bracelet").count) > 0 then
-        xPlayer.removeInventoryItem("bracelet", 1)
-        if casse == 1 then
+        if (casse == 1) then
             xPlayer.removeInventoryItem("pince", 1)
-            TriggerClientEvent('esx:showNotification', source, 'Merde, la pince s\'est cassée !')
+            return TriggerClientEvent('esx:showNotification', source, 'Merde, la pince s\'est cassée !');
         end
+            
+        xPlayer.removeInventoryItem("bracelet", 1)
         for i = 1, #xPlayers, 1 do
             local xPlayer = ESX.GetPlayerFromId(xPlayers[i])
             if (xPlayer.getJob().name) == JobPolice then TriggerClientEvent('esx:showAdvancedNotification', xPlayers[i], "Central", "Information", ("Signal perdu du bracelet de : ~r~%s~s~"):format(name), "CHAR_CHAT_CALL", 2) end
